@@ -8,7 +8,7 @@
 version: '2'
 
 services:
-  postfix:
+  opendkim:
     image: lisnaz/opendkim:latest
     ports:
     - "9901:9901/tcp"
