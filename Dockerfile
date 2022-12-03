@@ -13,7 +13,7 @@ MAINTAINER Vincent Gu <v@vgu.io>
 ENV OPENDKIM_DIR                        "${ROOT_DIR}/opendkim"
 ENV DKIM_LISTEN_ADDR                    "0.0.0.0"
 ENV DKIM_LISTEN_PORT                    9901
-ENV DKIM_DOMAIN                         "${POSTFIX_DOMAIN}"
+ENV DKIM_DOMAINS                        ""
 ENV DKIM_SELECTOR                       mail
 ENV DKIM_KEY_FILE                       "${OPENDKIM_DIR}/${DKIM_SELECTOR}.private"
 ENV DKIM_TRUSTED_HOSTS                  "127.0.0.1\n::1\nlocalhost\n\n\*.example.com"

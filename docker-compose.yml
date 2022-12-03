@@ -15,7 +15,8 @@ services:
     volumes:
     - opendkim:/srv/opendkim
     environment:
-      DKIM_DOMAIN: example.com
+      DKIM_DOMAINS: "example.com example2.com"
+      DKIM_SELECTOR: mail
       DKIM_TRUSTED_HOSTS: |
         127.0.0.1
         ::1
