@@ -49,16 +49,16 @@ mkdir -p "keys"
 
 IFS=' ' read -ra items <<< "${DKIM_DOMAINS}"
 for i in "${items[@]}"; do
-    if [ ! -f "./keys/$i.private" ]; then
+    if [ ! -f "./keys/${DKIM_SELECTOR}.${i}.private" ]; then
         pushd keys
         opendkim-genkey -s "${DKIM_SELECTOR}" -d "${i}"
         chmod 600 "${DKIM_SELECTOR}".private
         mv "${DKIM_SELECTOR}".private "${DKIM_SELECTOR}.${i}".private
         mv "${DKIM_SELECTOR}".txt "${DKIM_SELECTOR}.${i}".txt
-        echo :::please consult your DNS service provider and add below to your DNS TXT record:::
-        cat "${DKIM_SELECTOR}.${i}".txt
         popd
     fi
+    echo :::please consult your DNS service provider and add below to your DNS TXT record:::
+    cat "./keys/${DKIM_SELECTOR}.${i}".txt
 
     cat <<EOF >> KeyTable
 ${DKIM_SELECTOR}._domainkey.${i} ${i}:${DKIM_SELECTOR}:${OPENDKIM_DIR}/keys/${DKIM_SELECTOR}.${i}.private
